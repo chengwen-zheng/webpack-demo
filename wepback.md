@@ -15,7 +15,7 @@ wepbck的使用
 ## source map
 1. 线上排查问题的时候可以将 sourcemap 上传到错误监控系统.
 
-2. [source科普文](http://www.ruanyifeng.com/blog/2013/01/javascript_source_map.html)
+2. [source map科普文](http://www.ruanyifeng.com/blog/2013/01/javascript_source_map.html)
 
 3. source map关键字：
     + eval: 使⽤eval包裹模块代码
