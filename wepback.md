@@ -42,3 +42,4 @@ wepbck的使用
 
 3. 页面公共文件分离：[SplitChunksPlugin](https://www.webpackjs.com/plugins/split-chunks-plugin/#root)。
 ![test-api](./images/common-file.png)
+Note：分离出来的chunk系统要将利用HtmlWebpackPlugin的chunks字段引用到html中。
