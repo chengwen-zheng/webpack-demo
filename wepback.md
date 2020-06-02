@@ -33,6 +33,7 @@
 
 2. [SplitChunksPlugin](https://www.webpackjs.com/plugins/split-chunks-plugin/#root)分离js基础包。
 `test`: 匹配出需要分离的包
+
 ![test-api](./images/test-api.png)
 
 3. 公共脚本分离：[SplitChunksPlugin](https://www.webpackjs.com/plugins/split-chunks-plugin/#root)。
@@ -49,4 +50,11 @@ Note：分离出来的chunk系统要将利用HtmlWebpackPlugin的chunks字段引
 
 ## tree-shaking
 
-定义：tree shaking 是一个术语，通常用于描述移除 JavaScript 上下文中的未引用代码(dead-code)。它依赖于 **ES2015 模块系统中的静态结构特性**，例如 import 和 export。
+定义：tree shaking 是一个术语，通常用于描述移除 JavaScript 上下文中的未引用代码(dead-code)。它依赖于 **ES2015 模块系统中的静态结构特性**，例如 import 和 export。`mode=production`默认开启`tree-shaking`。
+
+利⽤ ES6 模块的特点:
+
++ 只能作为模块顶层的语句出现
++ import 的模块名只能是字符串常量
++ import binding 是 immutable的
+Note：es6模块系统是编译时加载的。也就是说js在编译时已经静态引入。不同Commonjs或者seajs那样可以动态引入（运行时加载）。
