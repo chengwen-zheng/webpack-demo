@@ -1,18 +1,20 @@
-wepbck的使用
+# wepbck的使用
 
 ## webpack资源的内联
 
 1. 资源内联的好处
 代码层面：
+
 + ⻚⾯框架的初始化脚本
 + 上报相关打点
 + css内联避免⻚⾯闪动
 
 请求层面：减少HTTP网络请求数
+
 + ⼩图⽚或者字体内联 (url-loader)
 
-
 ## source map
+
 1. 线上排查问题的时候可以将 sourcemap 上传到错误监控系统.
 
 2. [source map科普文](http://www.ruanyifeng.com/blog/2013/01/javascript_source_map.html)
@@ -25,6 +27,7 @@ wepbck的使用
     + module:包含loader的sourcemap
 
 ## 提取页面公共资源
+
 1. 基础库分离：利用CDN，不打入bundle。(使⽤ `html-webpack-externals-plugin`);
 ![CDN打包](./images/html-webpack-externals-plugin.png)
 
@@ -33,13 +36,17 @@ wepbck的使用
 ![test-api](./images/test-api.png)
 
 3. 公共脚本分离：[SplitChunksPlugin](https://www.webpackjs.com/plugins/split-chunks-plugin/#root)。
-基本配置：
-* `chunks` 参数说明
-    + `async` 异步引⼊的库进⾏分离(默认)
-    + `initial` 同步引⼊的库进⾏分离
-    + `all` 所有引⼊的库进⾏分离(推荐)
+基本配置：`chunks` 参数说明。
 
++ `async` 异步引⼊的库进⾏分离(默认)
++ `initial` 同步引⼊的库进⾏分离
++ `all` 所有引⼊的库进⾏分离(推荐)
 
-3. 页面公共文件分离：[SplitChunksPlugin](https://www.webpackjs.com/plugins/split-chunks-plugin/#root)。
+4. 页面公共文件分离：[SplitChunksPlugin](https://www.webpackjs.com/plugins/split-chunks-plugin/#root)。
+
 ![test-api](./images/common-file.png)
 Note：分离出来的chunk系统要将利用HtmlWebpackPlugin的chunks字段引用到html中。
+
+## tree-shaking
+
+定义：tree shaking 是一个术语，通常用于描述移除 JavaScript 上下文中的未引用代码(dead-code)。它依赖于 **ES2015 模块系统中的静态结构特性**，例如 import 和 export。
