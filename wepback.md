@@ -48,7 +48,7 @@
 ![test-api](./images/common-file.png)
 Note：分离出来的chunk系统要将利用HtmlWebpackPlugin的chunks字段引用到html中。
 
-## tree-shaking
+## tree-shaking（webpack借鉴与rollupjs）
 
 定义：tree shaking 是一个术语，通常用于描述移除 JavaScript 上下文中的未引用代码(dead-code)。它依赖于 **ES2015 模块系统中的静态结构特性**，例如 import 和 export。`mode=production`默认开启`tree-shaking`。
 
@@ -57,4 +57,17 @@ Note：分离出来的chunk系统要将利用HtmlWebpackPlugin的chunks字段引
 + 只能作为模块顶层的语句出现
 + import 的模块名只能是字符串常量
 + import binding 是 immutable的
+
 Note：es6模块系统是编译时加载的。也就是说js在编译时已经静态引入。不同Commonjs或者seajs那样可以动态引入（运行时加载）。
+
+## scope hoisting（同上也是借鉴rollupjs）
+
+定义：将所有模块的代码按照引⽤顺序放在⼀个函数作⽤域⾥，然后适当的重命名⼀
+些变量以防⽌变量名冲突。`mode=production`默认开启`scope-hoisting`。
+作用：通过 scope hoisting 可以减少函数声明代码和内存开销。
+开启前：
+![scope-hoisting-before](./images/scope-hoisting-before.jpg)
+开启的配置：
+![scope-hoisting-after](./images/scope-hoisting-after.jpg)
+
+## Code Splitting与按需加载
