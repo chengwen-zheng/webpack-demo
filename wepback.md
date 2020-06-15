@@ -79,6 +79,33 @@ webpack除了可以打包应用，也可以用来打包js库。
 应用：实现一个大整数加法库的打包。（demo在webpack-large-number）
 要求：
 
-1. 需要打包压缩版和非压缩版。
+1. 需要打包压缩版和非压缩版。见webpack-large-number里面的webpack.config.js的配置。[关于library相关的配置](https://www.webpackjs.com/guides/author-libraries/#%E5%9F%BA%E6%9C%AC%E9%85%8D%E7%BD%AE)
 
-2. 支持AMD/CJS/ESM 模块引入。
+2. 支持AMD/CJS/ESM 模块引入，即UMD功能。
+UMD原理：先判断是否支持Node.js模块格式（exports是否存在），存在则使用Node.js模块格式。
+再判断是否支持AMD（define是否存在），存在则使用AMD方式加载模块。
+前两个都不存在，则将模块公开到全局（window或global）。
+
+```js
+// if the module has no dependencies, the above pattern can be simplified to
+(function (root, factory) {
+    if (typeof define === 'function' && define.amd) {
+        // AMD. Register as an anonymous module.
+        define([], factory);
+    } else if (typeof exports === 'object') {
+        // Node. Does not work with strict CommonJS, but
+        // only CommonJS-like environments that support module.exports,
+        // like Node.
+        module.exports = factory();
+    } else {
+        // Browser globals (root is window)
+        root.returnExports = factory();
+  }
+}(this, function () {
+
+    // Just return a value to define the module export.
+    // This example returns an object, but the module
+    // can return a function as the exported value.
+    return {};
+}));
+```
