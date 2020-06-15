@@ -65,9 +65,20 @@ Note：es6模块系统是编译时加载的。也就是说js在编译时已经�
 定义：将所有模块的代码按照引⽤顺序放在⼀个函数作⽤域⾥，然后适当的重命名⼀
 些变量以防⽌变量名冲突。`mode=production`默认开启`scope-hoisting`。
 作用：通过 scope hoisting 可以减少函数声明代码和内存开销。
-开启前：
 ![scope-hoisting-before](./images/scope-hoisting-before.jpg)
 开启的配置：
 ![scope-hoisting-after](./images/scope-hoisting-after.jpg)
 
 ## Code Splitting与按需加载
+
+定义：
+
+## webpack打包库和组件
+
+webpack除了可以打包应用，也可以用来打包js库。
+应用：实现一个大整数加法库的打包。（demo在webpack-large-number）
+要求：
+
+1. 需要打包压缩版和非压缩版。
+
+2. 支持AMD/CJS/ESM 模块引入。

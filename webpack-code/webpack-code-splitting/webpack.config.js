@@ -1,4 +1,5 @@
 var path = require("path");
+var webpack = require('webpack');
 
 module.exports = {
     entry: path.join(__dirname, 'index.js'),
@@ -8,5 +9,8 @@ module.exports = {
         chunkFilename: '[name].bundle.js'
     },
     // 这里如果不设置成none。webpack则默认设成production。则有些功能默认开启。https://webpack.js.org/configuration/mode/
-    mode: 'none'
+    mode: 'none',
+    plugins:[
+        // new webpack.optimize.ModuleConcatenationPlugin()
+    ]
 };
