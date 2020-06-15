@@ -109,3 +109,5 @@ UMD原理：先判断是否支持Node.js模块格式（exports是否存在），
     return {};
 }));
 ```
+
+3. 用`npm publish`发布到npm上面。
