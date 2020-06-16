@@ -87,28 +87,34 @@ UMD原理：先判断是否支持Node.js模块格式（exports是否存在），
 前两个都不存在，则将模块公开到全局（window或global）。
 
 ```js
-// if the module has no dependencies, the above pattern can be simplified to
-(function (root, factory) {
-    if (typeof define === 'function' && define.amd) {
-        // AMD. Register as an anonymous module.
-        define([], factory);
-    } else if (typeof exports === 'object') {
-        // Node. Does not work with strict CommonJS, but
-        // only CommonJS-like environments that support module.exports,
-        // like Node.
-        module.exports = factory();
-    } else {
-        // Browser globals (root is window)
-        root.returnExports = factory();
-  }
-}(this, function () {
+(function webpackUniversalModuleDefinition(root, factory) {
+ if(typeof exports === 'object' && typeof module === 'object')
+  module.exports = factory();
+ else if(typeof define === 'function' && define.amd)
+  define([], factory);
+ else if(typeof exports === 'object')
+  exports["largeNumber"] = factory();
+ else
+  root["largeNumber"] = factory();
+})(window, function() {
+return /******/ (function(modules) { // webpackBootstrap
+        // webapck 模块相关的代码
+/******/  return __webpack_require__(__webpack_require__.s = 0);
+/******/ })
+/************************************************************************/
+/******/ ([
+/* 0 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
-    // Just return a value to define the module export.
-    // This example returns an object, but the module
-    // can return a function as the exported value.
-    return {};
-}));
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) fucnt*/ __webpack_require__.d(__webpack_exports__, "default", function() { return add; });
+function add(a,b){}
+/***/ })
+/******/ ])["default"];
+});
 ```
 
 3. 用`npm publish`发布到npm上面。
 
+## webpack打包SSR
