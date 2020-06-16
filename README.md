@@ -117,7 +117,7 @@ function add(a,b){}
 
 3. 用`npm publish`发布到npm上面
 
-## webpack打包SSR
+## webpack打包SSR(demo为webpack-ssr-demo)
 
 1. 创建后端对应的Router。返回静态资源。（包括打包后html,css，asset等）。
 
