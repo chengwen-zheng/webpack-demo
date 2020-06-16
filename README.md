@@ -115,6 +115,16 @@ function add(a,b){}
 });
 ```
 
-3. 用`npm publish`发布到npm上面。
+3. 用`npm publish`发布到npm上面
 
 ## webpack打包SSR
+
+1. 创建后端对应的Router。返回静态资源。（包括打包后html,css，asset等）。
+
+2. 前端组件要用Commonjs的加载。
+
+3. 后端的window不存在，需要加上一个hack。
+
+![window-profile](./images/window-profile.png)
+
+4. webpack打包的`mode`要对应是`none`，`output.libraryTarget`要对应的是`umd`, 这样打包后的js才能以`commonjs`方式加载。
