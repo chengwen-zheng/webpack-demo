@@ -125,6 +125,43 @@ function add(a,b){}
 
 3. 后端的window不存在，需要加上一个hack。
 
-![window-profile](./images/window-profile.png)
+![window-profile](./images/window-profile.png)。
 
 4. webpack打包的`mode`要对应是`none`，`output.libraryTarget`要对应的是`umd`, 这样打包后的js才能以`commonjs`方式加载。
+
+5. 前端对应的html利用占位符替换react渲染出来的html和后端的data。
+
+## 显示日志
+
+1. 配置项`status`[多种属性值](https://webpack.js.org/configuration/stats/)。
+
+2. 可以利用`friendly-errors-webpack-plugin`插件优化构建日志。
+
+3. 在CI/CD 的pipline 或者发布系统需要知道当前构建状态，每次构建完成后输⼊入echo $? 获取错误码
+
+## 构建异常和中断处理
+
+### webpack4 之前的版本构建失败不会抛出错误码(error code)，Node.js 中的process.exit 规范
+
++ 0   表示成功完成，回调函数中，err 为null
+
++ 非0 表示执⾏行行失败，回调函数中，err 不不为null，err.code 就是传给exit 的数字
+
+### 主动捕获并处理理构建错误
+
+compiler (*webpack中重要的一个对象*) 在每次构建结束后会触发`done`这个hook。
+
+```js
+plugins:[
+  function() {
+              this.hooks.done.tap('done', (stats) => {
+                  if (stats.compilation.errors && stats.compilation.errors.length && process.argv.indexOf('--watch') == -1)
+                  {
+                      console.log('build error');
+                      process.exit(1);
+                  }
+              })
+  }]
+```
+
+## 
