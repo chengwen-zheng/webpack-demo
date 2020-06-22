@@ -164,4 +164,15 @@ plugins:[
   }]
 ```
 
-## 
+## webpack的优化策略
+
+1. 利用stats查看本次的打包的初级情况。
+
+2. 速度分析：[使用speed-measure-webpack-plugin](https://github.com/stephencookdev/speed-measure-webpack-plugin)
+
+3. 体积分析：[使用webpack-bundle-analyzer](https://github.com/webpack-contrib/webpack-bundle-analyzer)
+
+4. 使用高版本的nodejs和webpack
+
+5. 多进程/多实例构建：资源并行解析可选方案。[HappyPack](https://github.com/amireh/happypack)和[thread-loader](https://github.com/webpack-contrib/thread-loader)
+

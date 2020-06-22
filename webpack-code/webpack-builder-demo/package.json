@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "nyc ./node_modules/.bin/_mocha",
-    "eslint": "eslint ./lib --fix"
+    "eslint": "eslint ./lib --fix",
+    "build:stats":"npm run test --json >> stats.json" 
   },
   "devDependencies": {
     "assert": "^2.0.0",
