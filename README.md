@@ -174,5 +174,4 @@ plugins:[
 
 4. 使用高版本的nodejs和webpack
 
-5. 多进程/多实例构建：资源并行解析可选方案。[HappyPack](https://github.com/amireh/happypack)和[thread-loader](https://github.com/webpack-contrib/thread-loader)
-
+5. 多进程/多实例构建：资源并行解析可选方案。[HappyPack](https://github.com/amireh/happypack)和[thread-loader](https://github.com/webpack-contrib/thread-loader)。*Demo为webpack-multi-threaded-packaging*。
