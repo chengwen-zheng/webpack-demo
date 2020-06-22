@@ -2,11 +2,11 @@
 
 import React from 'react';
 import ReactDOM from 'react-dom';
-import largeNumber from 'webpack-large-number-publish';
 import logo from './images/logo.png';
 import './search.less';
 import { a } from './tree-shaking'
 import {common} from '../../common/index'
+import 'babel-polyfill'
 
 class Search extends React.Component {
 
@@ -28,11 +28,9 @@ class Search extends React.Component {
 
     render() {
         const { Text } = this.state;
-        const addResult = largeNumber('999', '1');
         const string = common();
         return <div className="search-text">
            
-            { addResult }
             搜索文字的内容<img src={ logo } onClick={ this.loadComponent.bind(this) } />
         </div>;
     }
