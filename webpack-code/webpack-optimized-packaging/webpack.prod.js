@@ -18,7 +18,12 @@ const HappyPack = require('happypack');
 const threadLoader = require('thread-loader');
 const TerserWebpackPlugin = require('terser-webpack-plugin');
 const HardSourceWebpackPlugin = require('hard-source-webpack-plugin');
+const PurgecssPlugin = require('purgecss-webpack-plugin')
 
+const PATHS = {
+    src: path.join(__dirname, 'src')
+};
+  
 
 const setMPA = () => {
     const entry = {};
@@ -181,7 +186,10 @@ module.exports = {
         // new webpack.DllReferencePlugin({
         //     manifest: require('./build/library/library.json')
         // }),
-        new HardSourceWebpackPlugin()
+        new HardSourceWebpackPlugin(),
+        new PurgecssPlugin({
+            paths: glob.sync(`${PATHS.src}/**/*`,  { nodir: true }),
+        })
     ].concat(htmlWebpackPlugins),
     // optimization: {
     //     splitChunks: {

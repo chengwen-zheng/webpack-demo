@@ -241,3 +241,8 @@ module.exports = {
     }
 }
 ```
+
+9. tree shaking. 上面已有提到。这里主要讲解擦除无用的CSS。
+    + PurifyCSS: 遍历代码，识别已经用到的CSS class
+    + uncss: HTML 需要通过jsdom 加载，所有的样式通过PostCSS解析，通过document.querySelector 来识别在html 文件里面不存在的选择器
+Notes: purgecss-webpack-plugin和mini-css-extract-plugin 配合使用。[webpack配置见这里](https://purgecss.com/plugins/webpack.html)

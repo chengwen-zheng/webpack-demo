@@ -8,6 +8,7 @@ import { a } from './tree-shaking'
 import {common} from '../../common/index'
 import 'babel-polyfill'
 
+
 class Search extends React.Component {
 
     constructor() {
