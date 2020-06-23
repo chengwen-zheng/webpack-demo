@@ -246,3 +246,5 @@ module.exports = {
     + PurifyCSS: 遍历代码，识别已经用到的CSS class
     + uncss: HTML 需要通过jsdom 加载，所有的样式通过PostCSS解析，通过document.querySelector 来识别在html 文件里面不存在的选择器
 Notes: purgecss-webpack-plugin和mini-css-extract-plugin 配合使用。[webpack配置见这里](https://purgecss.com/plugins/webpack.html)
+
+10. 体积缩减：图片压缩。基于Node 库的imagemin 或者tinypng API。webpack插件[image-webpack-loader](https://github.com/tcoopman/image-webpack-loader)。注意该插件高版本的window貌似不能安装。
