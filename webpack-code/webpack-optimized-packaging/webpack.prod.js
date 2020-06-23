@@ -16,7 +16,7 @@ const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin');
 // } = require('webpack-bundle-analyzer');
 const HappyPack = require('happypack');
 const threadLoader = require('thread-loader');
-
+const TerserWebpackPlugin = require('terser-webpack-plugin');
 
 const setMPA = () => {
     const entry = {};
@@ -26,7 +26,6 @@ const setMPA = () => {
     Object.keys(entryFiles)
         .map((index) => {
             const entryFile = entryFiles[index];
-            // '/Users/cpselvis/my-project/src/index/index.js'
 
             const match = entryFile.match(/src\/(.*)\/index\.js/);
             const pageName = match && match[1];
@@ -176,7 +175,10 @@ module.exports = {
                     process.exit(1);
                 }
             })
-        }
+        },
+        // new webpack.DllReferencePlugin({
+        //     manifest: require('./build/library/library.json')
+        // })
     ].concat(htmlWebpackPlugins),
     // optimization: {
     //     splitChunks: {
@@ -190,5 +192,12 @@ module.exports = {
     //         }
     //     }
     // }
-    // stats: 'errors-only'
+    // stats: 'errors-only',
+    optimization:{
+        minimizer: [
+            new TerserWebpackPlugin({
+                parallel: 4
+            })
+        ]
+    }
 };

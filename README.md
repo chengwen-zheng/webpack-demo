@@ -176,4 +176,46 @@ plugins:[
 
 5. 多进程/多实例构建：资源并行解析可选方案。[HappyPack](https://github.com/amireh/happypack)和[thread-loader](https://github.com/webpack-contrib/thread-loader)。*Demo为webpack-multi-threaded-packaging*。
 
-6. 多线程并行压缩: 
+6. 多线程并行压缩:
+    + [parallel-uglify-plugin](https://github.com/gdborton/webpack-parallel-uglify-plugin) 插件
+    + [uglifyjs-webpack-plugin](https://github.com/webpack-contrib/uglifyjs-webpack-plugin) 开启parallel 参数
+    + [terser-webpack-plugin](https://github.com/webpack-contrib/terser-webpack-plugin) 开启parallel 参数 *推荐*
+
+7. 分包
+    + 使用html-webpack-externalsplugin。将react、react-dom 基础包通过cdn 引入，不打入bundle 中
+    + 使用DLLPlugin 进行分包，DllReferencePlugin对manifest.json 引用。将react、react-dom、redux、react-redux基础包和业务基础包打包成一个文件。
+相关配置：生成libary。配置webpack.dll.js
+
+```js
+const path  = require('path');
+const webpack = require('webpack');
+
+module.exports = {
+    entry: {
+            library: ['react','react-dom']
+    },
+    output: {
+        filename: '[name]_[chunkhash].dll.js',
+        path: path.join(__dirname, 'build/library'),
+        library: '[name]'
+    },
+    plugins: [
+        new webpack.DllPlugin({
+            name: '[name]_[hash]',
+            path: path.join(__dirname, 'build/library/[name].json')
+        })
+    ]
+}
+```
+
+DllReferencePlugin 引用manifest.json
+
+```js
+module.exports = {
+    plugins:[
+        new webpack.DllReferencePlugin({
+            manifest: require('./build/library/library.json')
+        })
+    ]
+}
+```
