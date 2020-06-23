@@ -219,3 +219,8 @@ module.exports = {
     ]
 }
 ```
+
+8. 缓存: 提升二次构建速度。
+    + babel-loader 开启缓存。在babel-loader后面加上`cacheDirectory=true`。
+    + terser-webpack-plugin 开启缓存。 在option里面加上`cache=true`。
+    + 使用cache-loader或者hard-source-webpack-plugin。

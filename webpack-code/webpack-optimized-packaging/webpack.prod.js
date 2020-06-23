@@ -17,6 +17,8 @@ const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin');
 const HappyPack = require('happypack');
 const threadLoader = require('thread-loader');
 const TerserWebpackPlugin = require('terser-webpack-plugin');
+const HardSourceWebpackPlugin = require('hard-source-webpack-plugin');
+
 
 const setMPA = () => {
     const entry = {};
@@ -84,7 +86,7 @@ module.exports = {
                           }
                     },
                     {
-                        loader:'babel-loader'
+                        loader:'babel-loader?cacheDirectory=true'
                     }
                 ]
             },
@@ -178,7 +180,8 @@ module.exports = {
         },
         // new webpack.DllReferencePlugin({
         //     manifest: require('./build/library/library.json')
-        // })
+        // }),
+        new HardSourceWebpackPlugin()
     ].concat(htmlWebpackPlugins),
     // optimization: {
     //     splitChunks: {
@@ -196,7 +199,8 @@ module.exports = {
     optimization:{
         minimizer: [
             new TerserWebpackPlugin({
-                parallel: 4
+                parallel: 4,
+                cache: true
             })
         ]
     }

@@ -38,6 +38,7 @@
     "friendly-errors-webpack-plugin": "^1.7.0",
     "glob": "^7.1.4",
     "happypack": "^5.0.1",
+    "hard-source-webpack-plugin": "^0.13.1",
     "html-inline-css-webpack-plugin": "^1.2.1",
     "html-loader": "^0.5.5",
     "html-webpack-externals-plugin": "^3.8.0",
