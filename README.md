@@ -248,3 +248,5 @@ module.exports = {
 Notes: purgecss-webpack-plugin和mini-css-extract-plugin 配合使用。[webpack配置见这里](https://purgecss.com/plugins/webpack.html)
 
 10. 体积缩减：图片压缩。基于Node 库的imagemin 或者tinypng API。webpack插件[image-webpack-loader](https://github.com/tcoopman/image-webpack-loader)。注意该插件高版本的window貌似不能安装。
+
+11. 构建体积优化：如何使用动态Polyfill service.通过判断User Agent。来实现浏览器不支持的js特性。polyfill.io 官方提供的服务`<script src='https://polyfill.io/v3/polyfill.min.js'></script>`
