@@ -224,3 +224,20 @@ module.exports = {
     + babel-loader 开启缓存。在babel-loader后面加上`cacheDirectory=true`。
     + terser-webpack-plugin 开启缓存。 在option里面加上`cache=true`。
     + 使用cache-loader或者hard-source-webpack-plugin。
+
+9. 缩小构建目标，即尽可能减少构建模块。
+    + babel-loader 不解析node_modules。loader中加入`exclude=node_modules`
+    + 减少文件搜索范围
+
+```js
+module.exports = {
+    resolve:{
+        alias: {
+            'react': path.resolve(__dirname, './node_modules/react/umd/react.production.min.js'),
+            'react-dom': path.resolve(__dirname, './node_modules/react-dom/umd/react-dom.production.min.js'),
+        },
+        extensions: ['.js'],
+        mainFields: ['main']
+    }
+}
+```

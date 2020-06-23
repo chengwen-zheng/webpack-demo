@@ -151,19 +151,19 @@ module.exports = {
             cssProcessor: require('cssnano')
         }),
         new CleanWebpackPlugin(),
-        new HtmlWebpackExternalsPlugin({
-            externals: [{
-                    module: 'react',
-                    entry: 'https://11.url.cn/now/lib/16.2.0/react.min.js',
-                    global: 'React',
-                },
-                {
-                    module: 'react-dom',
-                    entry: 'https://11.url.cn/now/lib/16.2.0/react-dom.min.js',
-                    global: 'ReactDOM',
-                },
-            ]
-        }),
+        // new HtmlWebpackExternalsPlugin({
+        //     externals: [{
+        //             module: 'react',
+        //             entry: 'https://11.url.cn/now/lib/16.2.0/react.min.js',
+        //             global: 'React',
+        //         },
+        //         {
+        //             module: 'react-dom',
+        //             entry: 'https://11.url.cn/now/lib/16.2.0/react-dom.min.js',
+        //             global: 'ReactDOM',
+        //         },
+        //     ]
+        // }),
         new FriendlyErrorsWebpackPlugin(),
         // new BundleAnalyzerPlugin(),
         // new HappyPack({
@@ -203,5 +203,13 @@ module.exports = {
                 cache: true
             })
         ]
+    },
+    resolve:{
+        alias: {
+            'react': path.resolve(__dirname, './node_modules/react/umd/react.production.min.js'),
+            'react-dom': path.resolve(__dirname, './node_modules/react-dom/umd/react-dom.production.min.js'),
+        },
+        extensions: ['.js'],
+        mainFields: ['main']
     }
 };
