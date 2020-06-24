@@ -19,7 +19,7 @@ const threadLoader = require('thread-loader');
 const TerserWebpackPlugin = require('terser-webpack-plugin');
 const HardSourceWebpackPlugin = require('hard-source-webpack-plugin');
 const PurgecssPlugin = require('purgecss-webpack-plugin');
-const ImageWabpackLoader = require('image-webpack-loader')
+// const ImageWabpackLoader = require('image-webpack-loader')
 
 const PATHS = {
     src: path.join(__dirname, 'src')
@@ -135,30 +135,32 @@ module.exports = {
                     options: {
                         name: '[name]_[hash:8].[ext]'
                     }
-                }, {
-                    loader: 'image-webpack-loader',
-                    options: {
-                      mozjpeg: {
-                        progressive: true,
-                        quality: 65
-                      },
-                      // optipng.enabled: false will disable optipng
-                      optipng: {
-                        enabled: false,
-                      },
-                      pngquant: {
-                        quality: [0.65, 0.90],
-                        speed: 4
-                      },
-                      gifsicle: {
-                        interlaced: false,
-                      },
-                      // the webp option will enable WEBP
-                      webp: {
-                        quality: 75
-                      }
-                    }
-                  }]
+                }, 
+                // {
+                //     loader: 'image-webpack-loader',
+                //     options: {
+                //       mozjpeg: {
+                //         progressive: true,
+                //         quality: 65
+                //       },
+                //       // optipng.enabled: false will disable optipng
+                //       optipng: {
+                //         enabled: false,
+                //       },
+                //       pngquant: {
+                //         quality: [0.65, 0.90],
+                //         speed: 4
+                //       },
+                //       gifsicle: {
+                //         interlaced: false,
+                //       },
+                //       // the webp option will enable WEBP
+                //       webp: {
+                //         quality: 75
+                //       }
+                //     }
+                //   }
+            ]
             },
             {
                 test: /.(woff|woff2|eot|ttf|otf)$/,
@@ -211,9 +213,9 @@ module.exports = {
         //     manifest: require('./build/library/library.json')
         // }),
         new HardSourceWebpackPlugin(),
-        new PurgecssPlugin({
-            paths: glob.sync(`${PATHS.src}/**/*`,  { nodir: true }),
-        })
+        // new PurgecssPlugin({
+        //     paths: glob.sync(`${PATHS.src}/**/*`,  { nodir: true }),
+        // })
     ].concat(htmlWebpackPlugins),
     // optimization: {
     //     splitChunks: {
