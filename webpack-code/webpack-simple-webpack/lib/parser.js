@@ -1,0 +1,41 @@
+const babylon = require('babylon');
+const {
+    transformFromAst,
+    traverse
+} = require('babel-core');
+const fs = require('fs');
+
+module.exports = {
+    getAST: (path) => {
+        const content = fs.readFileSync(path, 'utf-8');
+
+        return babylon.parse(content, {
+            sourceType: 'module'
+        });
+    },
+
+    getDependencies: (ast) => {
+        const dependencies = [];
+
+        traverse(ast, {
+            ImportDeclaration: ({
+                                    node
+                                }) => {
+                dependencies.push(node.source.value)
+            }
+        });
+
+        return dependencies;
+    },
+
+    transform: (ast) => {
+        const {
+            code
+        } = transformFromAst(ast, null, {
+            presets: ['env']
+        });
+
+        return code;
+    }
+
+}
