@@ -57,9 +57,9 @@ module.exports = class Compiler {
             (function (modules) {
                 function require(filename){
                     const fn = modules[filename];
-                    const module = { export: {} };
+                    const module = { exports: {} };
 
-                    fn(require, module, module.export);
+                    fn(require, module, module.exports);
                     
                     return module.exports;
                 }
@@ -68,7 +68,6 @@ module.exports = class Compiler {
             })({${modules}})
         `;
 
-        console.log(modules)
         fs.writeFileSync(outputPath, bundle, 'utf-8');
     }
 }
