@@ -250,3 +250,23 @@ Notes: purgecss-webpack-plugin和mini-css-extract-plugin 配合使用。[webpack
 10. 体积缩减：图片压缩。基于Node 库的imagemin 或者tinypng API。webpack插件[image-webpack-loader](https://github.com/tcoopman/image-webpack-loader)。注意该插件高版本的window貌似不能安装。
 
 11. 构建体积优化：如何使用动态Polyfill service.通过判断User Agent。来实现浏览器不支持的js特性。polyfill.io 官方提供的服务`<script src='https://polyfill.io/v3/polyfill.min.js'></script>`
+
+## [webpack自定义的loader](https://webpack.js.org/api/loaders/)
+
+1. loader的定义：loader 只是一个导出为函数的JavaScript模块。所以多个loader串行执行，顺序从后往前。
+函数的组合：
+    + Unix的pipline。
+    + Compose(webpack采用的这种)。`compose = (f, g) => (...args) => f(g(...args))`
+
+2. 我们利用[loader-runner](loader-runner)模拟loader运行环境。
+
+3. 利用[loader-utils](https://github.com/webpack/loader-utils)处理一些loader需求。
+获得option参数。`const { name } = loaderUtils.getOptions(this);`
+
+4. loader的异常处理。一是通过loader内部直接throw，二是通过this.callback()第一个参数传输。this.callback()是用来传输参数的，result也就是this.callback的执行结果。
+
+5. 缓存的处理。开启缓存的条件：一是loader的结果在相同的输入下有确定的输出。二是返回的结果除了用this.addDependency指定的依赖关系外，loader没有其它loader依赖。
+
+6. loader用this.emitFile进行文件写入。利用`loader-utils.interpolateName`获得处理的文件名等一些信息。
+
+7. this.async()返回异步事件结果，比如IO等。
